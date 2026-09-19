@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abhishek Batham · Software Developer & Security Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Caveat:wght@500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#f7f3ed;color:#1c1917;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+  h1,h2,h3,h4{font-family:'Fraunces',serif;letter-spacing:-0.015em;line-height:1.1}
+  .script{font-family:'Caveat',cursive;color:#c65d3b}
+  .wrap{max-width:820px;margin:0 auto;padding:0 22px}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
+  .brand{font-family:'Fraunces',serif;font-size:22px;font-weight:700;text-decoration:none;color:inherit}
+  .btn{background:#c65d3b;color:#fff;padding:12px 24px;border-radius:999px;font-size:14px;font-weight:500;text-decoration:none;transition:all .2s;display:inline-block}
+  .btn:hover{background:#a84a2d;transform:translateY(-1px)}
+  .dotted{border-top:1px dashed #d6cfc4;margin:6px 0 40px}
+  .hero{padding:40px 0 60px}
+  .hero .hi{color:#6b6355;font-size:18px;margin-bottom:8px}
+  .hero h1{font-size:clamp(44px,7vw,68px);font-weight:700;margin-bottom:22px;line-height:1.05}
+  .hero .tag{font-size:clamp(20px,3vw,26px);color:#3a3530;font-weight:500;margin-bottom:20px;font-family:'Fraunces',serif;font-style:italic}
+  .hero .bio{color:#5a5348;font-size:17px;max-width:620px;margin-bottom:26px}
+  .hero .pss{color:#8a7f70;font-size:14px}
+  .hero .pss a{color:#c65d3b;text-decoration:underline;text-underline-offset:3px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0;padding:40px 0;border-top:1px dashed #d6cfc4;border-bottom:1px dashed #d6cfc4;margin:40px 0}
+  .stat{padding:20px 24px;border-right:1px dashed #d6cfc4;text-align:left}
+  .stat:last-child{border-right:none}
+  .stat .num{font-family:'Fraunces',serif;font-size:32px;font-weight:700;color:#1c1917;margin-bottom:6px}
+  .stat .lbl{color:#8a7f70;font-size:13px;line-height:1.4}
+  .section{padding:70px 0}
+  .section .kicker{color:#6b6355;font-size:15px;margin-bottom:8px}
+  .section h2{font-size:clamp(32px,5vw,44px);font-weight:700;margin-bottom:16px}
+  .section .sub{color:#5a5348;font-size:16px;max-width:620px;margin-bottom:40px}
+  .program{background:#fdfbf8;border:1px solid #eee7db;border-radius:22px;padding:36px;margin-top:8px}
+  .program .badge{display:inline-block;background:#f3ede4;color:#8a7f70;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;margin-bottom:16px}
+  .program h3{font-size:26px;font-weight:600;margin-bottom:12px;font-family:'Fraunces',serif}
+  .program p{color:#5a5348;font-size:15px;margin-bottom:20px}
+  .program .cta{color:#c65d3b;font-family:'Fraunces',serif;font-weight:600;text-decoration:none;font-size:15px}
+  .program .cta:hover{text-decoration:underline;text-underline-offset:3px}
+  .cards{display:grid;grid-template-columns:1fr;gap:14px}
+  .guide-card{background:#fffdfa;border:1px solid #eee7db;border-radius:18px;padding:24px;text-decoration:none;color:inherit;display:block;transition:all .25s ease}
+  .guide-card:hover{transform:translateY(-3px);box-shadow:0 20px 40px -24px rgba(198,93,59,.35);border-color:#e8d9c5}
+  .guide-card h4{font-family:'Fraunces',serif;font-size:18px;font-weight:600;margin-bottom:14px;line-height:1.35}
+  .tags{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+  .tag{padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500}
+  .tag-light{background:#f3ede4;color:#8a7f70;border:1px solid #e8e0d3}
+  .tag-solid{background:#c65d3b;color:#fff}
+  .read{font-family:'Fraunces',serif;font-size:14px;color:#c65d3b;font-weight:600}
+  .tricks-grid{display:grid;grid-template-columns:1fr;gap:12px}
+  .trick{background:#fdfbf8;border:1px solid #eee7db;border-radius:16px;padding:22px;transition:all .25s ease}
+  .trick:hover{border-color:#e8d9c5;box-shadow:0 16px 30px -22px rgba(198,93,59,.35)}
+  .trick .num{font-family:'Fraunces',serif;font-size:13px;font-weight:600;color:#c65d3b;margin-bottom:10px;letter-spacing:.05em}
+  .trick h4{font-family:'Fraunces',serif;font-size:17px;font-weight:600;margin-bottom:10px;line-height:1.3}
+  .trick p{color:#5a5348;font-size:14px;line-height:1.6;margin-bottom:14px}
+  .trick pre{background:#1c1917;color:#e5e5e5;padding:14px 16px;border-radius:10px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.55;overflow-x:auto;margin:0}
+  .trick code{font-family:'JetBrains Mono',ui-monospace,monospace}
+  .about p{color:#5a5348;font-size:16px;margin-bottom:16px;max-width:640px}
+  .about .em{font-family:'Fraunces',serif;font-style:italic;color:#3a3530;font-size:17px}
+  .contact{text-align:center;padding:70px 0}
+  .contact h2{font-size:clamp(30px,4.5vw,40px);font-weight:700;margin-bottom:14px}
+  .contact p{color:#5a5348;font-size:16px;margin-bottom:28px;max-width:520px;margin-left:auto;margin-right:auto}
+  .contact-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .contact-links a{background:#fdfbf8;border:1px solid #e8e0d3;padding:12px 24px;border-radius:999px;font-size:14px;text-decoration:none;color:#3a3530;transition:all .18s}
+  .contact-links a:hover{border-color:#c65d3b;color:#c65d3b}
+  .footer{text-align:center;padding:30px 0;color:#a89b88;font-size:13px;border-top:1px dashed #d6cfc4}
+  @media(max-width:640px){.stat{border-right:none;border-bottom:1px dashed #d6cfc4}.stat:last-child{border-bottom:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="nav">
+    <a href="#" class="brand">Abhishek Batham.</a>
+    <a href="guides.html" class="btn">Explore guides</a>
+  </nav>
+  <div class="dotted"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hi">hi, I'm</p>
+    <h1>Abhishek Batham</h1>
+    <p class="tag">Security you can actually build on.</p>
+    <p class="bio">
+      Software developer and security researcher. I build secure systems, break them to prove they're not, then write down exactly how. No buzzwords — just the tools, techniques, and mental models I use every day, broken down so anyone can follow.
+    </p>
+    <p class="pss">p.s. my guides library is now open → <a href="guides.html">browse guides</a></p>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="num">15+</div><div class="lbl">public repos &amp; security tools</div></div>
+    <div class="stat"><div class="num">5+</div><div class="lbl">years building &amp; breaking software</div></div>
+    <div class="stat"><div class="num">Web · RE · Linux</div><div class="lbl">core focus areas</div></div>
+  </div>
+
+  <!-- PROGRAM -->
+  <section class="section">
+    <p class="kicker">launching soon</p>
+    <h2>The Security Notes</h2>
+    <p class="sub">A weekly deep-dive into reverse engineering, web app security, and the tools that make it all work. Straight to your inbox. No fluff, no affiliate spam.</p>
+    <div class="program">
+      <span class="badge">coming soon</span>
+      <h3>Join the waitlist</h3>
+      <p>Get first access when the first issue drops. One long-form teardown per week — a real binary, a real target, a real chain of reasoning.</p>
+      <a href="mailto:abiiebatham12@gmail.com?subject=Security Notes waitlist" class="cta">Get on the list →</a>
+    </div>
+  </section>
+
+  <!-- GUIDES -->
+  <section class="section">
+    <p class="kicker">most loved</p>
+    <h2>Start with these free guides</h2>
+    <p class="sub">A few of the most-read notes from my library. All free, all technical, all written from real work.</p>
+    <div class="cards">
+      <a href="guides/ghidra-unpacking.html" class="guide-card">
+        <h4>Reverse engineering a packed binary: full Ghidra workflow</h4>
+        <div class="tags">
+          <span class="tag tag-light">Reverse Engineering</span>
+          <span class="tag tag-solid">Ghidra</span>
+        </div>
+        <span class="read">Read guide →</span>
+      </a>
+      <a href="guides.html" class="guide-card">
+        <h4>How modern auth actually breaks — IMAP, OAuth, and 2FA</h4>
+        <div class="tags">
+          <span class="tag tag-light">Web Security</span>
+          <span class="tag tag-solid">Python</span>
+        </div>
+        <span class="read">Read guide →</span>
+      </a>
+      <a href="guides.html" class="guide-card">
+        <h4>Linux hardening for developers: the defaults that bite you</h4>
+        <div class="tags">
+          <span class="tag tag-light">Linux &amp; Systems</span>
+          <span class="tag tag-solid">Linux</span>
+        </div>
+        <span class="read">Read guide →</span>
+      </a>
+    </div>
+    <p style="margin-top:26px;text-align:center"><a href="guides.html" class="read" style="font-size:15px">Browse the full library →</a></p>
+  </section>
+
+  <!-- FIELD NOTES -->
+  <section class="section">
+    <p class="kicker">from the work</p>
+    <h2>Field Notes</h2>
+    <p class="sub">Small things that save real time. Each one is something I actually use — one-liners, shortcuts, and shortcuts for shortcuts.</p>
+    <div class="tricks-grid">
+
+      <div class="trick">
+        <div class="num">01 — RECON</div>
+        <h4>Find every subdomain in one line</h4>
+        <p>Certificate transparency logs are public. Query them without any API key.</p>
+        <pre><code>curl -s "https://crt.sh/?q=%25.target.com&output=json" | jq -r '.[].name_value' | sort -u</code></pre>
+      </div>
+
+      <div class="trick">
+        <div class="num">02 — PYTHON</div>
+        <h4>Read any file as hex, find strings fast</h4>
+        <p>Skip the GUI. Two lines of Python give you a strings-like output for any offset range.</p>
+        <pre><code>data = open("sample.bin","rb").read()
+print(b"".join(c if 32&lt;=c&lt;127 else b"." for c in data[:4096]).decode())</code></pre>
+      </div>
+
+      <div class="trick">
+        <div class="num">03 — GHIDRA</div>
+        <h4>Rename every function that calls a string</h4>
+        <p>Script console — auto-label based on references. Huge time saver on big binaries.</p>
+        <pre><code>for ref in getReferencesTo(currentAddress):
+    f = getFunctionContaining(ref.getFromAddress())
+    if f: f.setName("ref_" + f.getName(), ghidra.program.model.symbol.SourceType.USER_DEFINED)</code></pre>
+      </div>
+
+      <div class="trick">
+        <div class="num">04 — X64DBG</div>
+        <h4>Jump to OEP on any UPX binary</h4>
+        <p>The ESP trick. Hardware breakpoint on the stack pointer at entry — breaks at OEP almost every time.</p>
+        <pre><code>1. At entry, note ESP value
+2. Command: "bphws esp, r, 4"
+3. F9 → breakpoint hits at original entry
+4. Remove breakpoint, dump memory</code></pre>
+      </div>
+
+      <div class="trick">
+        <div class="num">05 — BURP</div>
+        <h4>Regex-match every UUID in responses</h4>
+        <p>Proxy → Options → Match and Replace. Auto-flag every ID in the site map.</p>
+        <pre><code>[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}</code></pre>
+      </div>
+
+      <div class="trick">
+        <div class="num">06 — BASH</div>
+        <h4>Watch a log file for one pattern, live</h4>
+        <p>Filter noisy output as it happens. No tail + grep + pipe gymnastics.</p>
+        <pre><code>tail -f access.log | grep --line-buffered -E "(500|403|/admin)"</code></pre>
+      </div>
+
+      <div class="trick">
+        <div class="num">07 — LINUX</div>
+        <h4>Find world-writable files in 5 seconds</h4>
+        <p>Classic privilege-escalation recon. One command, useful output only.</p>
+        <pre><code>find / -xdev -type f -perm -0002 -not -path "/proc/*" 2&gt;/dev/null</code></pre>
+      </div>
+
+      <div class="trick">
+        <div class="num">08 — PYTHON</div>
+        <h4>Decode a rolling XOR in three lines</h4>
+        <p>When the obfuscation is a rolling byte key, brute the key by frequency.</p>
+        <pre><code>from collections import Counter
+c = Counter(a ^ b for a, b in zip(data, data[1:]))
+key = c.most_common(1)[0][0]  # most common XOR diff = likely space/0x00</code></pre>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about">
+    <p class="kicker">hi again 👋</p>
+    <h2>About me</h2>
+    <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;margin:20px 0 16px">A developer who fell for security</h3>
+    <p>I started as a B.Tech student writing Python scripts to automate small things. Then I got curious about what was happening under the hood — how authentication flows really work, how binaries behave, how modern apps are actually defended.</p>
+    <p>That curiosity turned into a focus: build secure systems, then break them to prove they're not. I work across Web AppSec, Reverse Engineering, and Linux — not as a researcher in a lab, but as someone who ships real tools and writes down what works.</p>
+    <p class="em">"The quieter you become, the more you can hear." — Kali Linux motto</p>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <p class="kicker">come say hi</p>
+    <h2>Let's build something.</h2>
+    <p>Follow along for field notes from building and breaking systems, or reach out about a collab.</p>
+    <div class="contact-links">
+      <a href="https://github.com/meltingYoureEgo" target="_blank">GitHub</a>
+      <a href="mailto:abiiebatham12@gmail.com">Email</a>
+      <a href="guides.html">Guides</a>
+    </div>
+  </section>
+
+  <div class="footer">© 2026 Abhishek Batham</div>
+
+</div>
+</body>
+</html>
