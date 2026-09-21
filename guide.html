@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Guide · Abhishek Batham</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#f7f3ed;color:#1c1917;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.7}
+  h1,h2,h3{font-family:'Fraunces',serif;letter-spacing:-0.015em;line-height:1.2}
+  code,pre{font-family:'JetBrains Mono',monospace}
+  .wrap{max-width:720px;margin:0 auto;padding:0 22px}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
+  .brand{font-family:'Fraunces',serif;font-size:22px;font-weight:700;text-decoration:none;color:inherit}
+  .btn{background:#c65d3b;color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;font-weight:500;text-decoration:none}
+  .btn:hover{background:#a84a2d}
+  .dotted{border-top:1px dashed #d6cfc4;margin:6px 0 40px}
+  .meta{color:#8a7f70;font-size:13px;margin-bottom:14px;letter-spacing:.02em}
+  .meta .dot-sep{margin:0 8px;opacity:.5}
+  h1{font-size:clamp(32px,5vw,46px);font-weight:700;margin-bottom:16px}
+  .lede{font-size:19px;color:#5a5348;font-family:'Fraunces',serif;font-style:italic;margin-bottom:32px;padding-bottom:28px;border-bottom:1px dashed #d6cfc4}
+  .tags{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap}
+  .tag{padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500}
+  .tag-light{background:#f3ede4;color:#8a7f70;border:1px solid #e8e0d3}
+  .tag-solid{background:#c65d3b;color:#fff}
+  article h2{font-size:26px;font-weight:600;margin-top:48px;margin-bottom:16px}
+  article h3{font-size:19px;font-weight:600;margin-top:32px;margin-bottom:12px}
+  article p{margin-bottom:18px;color:#3a3530}
+  article p code,article li code{background:#f3ede4;padding:2px 6px;border-radius:5px;font-size:.88em;color:#7a3a25}
+  article pre{background:#1c1917;color:#e5e5e5;padding:20px;border-radius:12px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin-bottom:22px;white-space:pre-wrap;word-break:break-word}
+  article ul,article ol{margin:0 0 22px 22px;color:#3a3530}
+  article li{margin-bottom:8px}
+  .footer{text-align:center;padding:60px 0 30px;color:#a89b88;font-size:13px;border-top:1px dashed #d6cfc4;margin-top:60px}
+  .back{color:#c65d3b;text-decoration:none;font-family:'Fraunces',serif;font-size:14px;font-weight:600}
+  .back:hover{text-decoration:underline;text-underline-offset:3px}
+  .loading,.notfound{text-align:center;padding:80px 20px;color:#8a7f70}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="nav">
+    <a href="index.html" class="brand">Abhishek Batham.</a>
+    <a href="guides.html" class="btn">← All guides</a>
+  </div>
+  <div class="dotted"></div>
+
+  <div id="app"><div class="loading">Loading…</div></div>
+
+  <div class="footer">
+    <a href="guides.html" class="back">← Back to all guides</a>
+    <p style="margin-top:20px">© 2026 Abhishek Batham</p>
+  </div>
+
+</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+const app = document.getElementById('app');
+
+function block(b){
+  if(b.t === 'h2')  return `<h2>${b.x}</h2>`;
+  if(b.t === 'h3')  return `<h3>${b.x}</h3>`;
+  if(b.t === 'p')   return `<p>${b.x}</p>`;
+  if(b.t === 'code')return `<pre><code>${escapeHtml(b.x)}</code></pre>`;
+  if(b.t === 'list')return `<ul>${b.items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+  return '';
+}
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+async function load(){
+  if(!id){
+    app.innerHTML = `<div class="notfound">No guide selected. <a href="guides.html" class="back">Back to library →</a></div>`;
+    return;
+  }
+  let guides = [];
+  try {
+    guides = await (await fetch('guides.json')).json();
+  } catch(e){
+    app.innerHTML = `<div class="notfound">Could not load guides.json</div>`;
+    return;
+  }
+  const g = guides.find(x => x.id === id);
+  if(!g){
+    app.innerHTML = `<div class="notfound">Guide not found. <a href="guides.html" class="back">Back to library →</a></div>`;
+    return;
+  }
+  document.title = g.title + ' · Abhishek Batham';
+
+  const meta = [
+    ...g.topics, g.read || null
+  ].filter(Boolean).join('<span class="dot-sep">·</span>');
+
+  const tags = [
+    ...g.topics.map(t=>`<span class="tag tag-light">${t}</span>`),
+    ...g.tools.map(t=>`<span class="tag tag-solid">${t}</span>`)
+  ].join('');
+
+  const body = (g.content && g.content.length)
+    ? g.content.map(block).join('')
+    : `<p>${g.desc}</p>`;
+
+  app.innerHTML = `
+    <div class="meta">${meta}</div>
+    <h1>${g.title}</h1>
+    <p class="lede">${g.desc}</p>
+    <div class="tags">${tags}</div>
+    <article>${body}</article>
+  `;
+}
+
+load();
+</script>
+</body>
+</html>
